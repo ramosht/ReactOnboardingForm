@@ -1,4 +1,7 @@
 import { useCallback, useState } from "react"
+import { Button } from "../../Button"
+import { ErrorMessage } from "../../ErrorMessage"
+import {Input} from '../../../components/Input'
 
 export const FullName = ({onNext}) => {
     const [fullName, setFullName] = useState('')
@@ -32,17 +35,18 @@ export const FullName = ({onNext}) => {
 
     return (
         <label>
-            <input 
+            <Input 
                 value={fullName} 
                 onChange={e => onNameChange(e.target.value)} 
                 type="text" 
+                onNextClick={onNextClick}
                 aria-label="fullname" 
                 aria-required="true" 
                 placeholder="Full name" 
                 name="fullname" 
             />
-            <button onClick={onNextClick}>Next</button>
-            {error && <p>{error}</p>}
+            <Button onClick={onNextClick}>Next</Button>
+            {error && <ErrorMessage>{error}</ErrorMessage>}
         </label>
     )
 }

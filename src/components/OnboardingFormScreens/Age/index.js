@@ -1,10 +1,13 @@
 import { useCallback, useState } from "react"
+import { Button } from "../../Button"
+import { ErrorMessage } from "../../ErrorMessage"
+import { Input } from "../../Input"
 
 export const Age = ({onNext}) => {
     const [age, setAge] = useState(null)
     const [error, setError] = useState('')
 
-    const onClickNext = useCallback(() => {
+    const onNextClick = useCallback(() => {
         if(!age) {
             setError('Insert your age')
             return
@@ -15,17 +18,18 @@ export const Age = ({onNext}) => {
 
     return (
         <label>
-            <input 
+            <Input 
                 value={age}
                 onChange={e => setAge(e.target.value)}
                 type="number" 
+                onNextClick={onNextClick}
                 aria-label="Age" 
                 aria-required="true" 
                 placeholder="Age" 
                 name="Age" 
             />
-            <button onClick={onClickNext}>Next</button>
-            {error && <p>{error}</p>}
+            <Button onClick={onNextClick}>Next</Button>
+            {error && <ErrorMessage>{error}</ErrorMessage>}
         </label>
     )
 }
